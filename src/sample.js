@@ -2,69 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
 
-// Component to display responses 
-class Review extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      name: '',
-      gender: '',
-      age: '',
-    };
-  }
-
-  componentWillMount() {
-    const { steps } = this.props;
-    const { name, gender, age } = steps;
-
-    this.setState({ name, gender, age });
-  }
-
-  
-
-  render() {
-    const { name, gender, age } = this.state;
-    return (
-      <div style={{ width: '100%' }}>
-        <h3>Summary</h3>
-        <table>
-          <tbody>
-            <tr>
-              <td>Name</td>
-              <td>{name.value}</td>
-            </tr>
-            <tr>
-              <td>Gender</td>
-              <td>{gender.value}</td>
-            </tr>
-            <tr>
-              <td>Age</td>
-              <td>{age.value}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
-
-Review.propTypes = {
-  steps: PropTypes.object,
-};
-
-Review.defaultProps = {
-  steps: undefined,
-};
-
-// Component to save responses to database
+ // Component to save responses to database
 class SaveData extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       name: '',
-      gender: '',
       age: '',
     };
   }
@@ -77,7 +22,8 @@ class SaveData extends Component {
   handleSaveData() {
 
     const { steps } = this.props;
-    const { name, gender, age } = steps;
+    // Removed gender
+    const { name, age } = steps; 
     
     fetch('http://localhost:3000/savedata', {
       method: 'POST',
@@ -87,7 +33,6 @@ class SaveData extends Component {
       body: JSON.stringify({
         name: name.value,
         age: age.value,
-        gender: gender.value
       }),
     })
       .then((response) => response.json())
@@ -118,8 +63,14 @@ class CocoBot extends Component {
         steps={[
           {
             id: '1',
+            message: "Hello there! I'm Cocobot, designed to help you understand graphs.",
+            trigger: '2',
+          },
+          {
+            id:'2',
             message: 'What is your name?',
             trigger: 'name',
+
           },
           {
             id: 'name',
@@ -128,25 +79,13 @@ class CocoBot extends Component {
           },
           {
             id: '3',
-            message: 'Hi {previousValue}! What is your gender?',
-            trigger: 'gender',
-          },
-          {
-            id: 'gender',
-            options: [
-              { value: 'male', label: 'Male', trigger: '5' },
-              { value: 'female', label: 'Female', trigger: '5' },
-            ],
-          },
-          {
-            id: '5',
-            message: 'How old are you?',
+            message: 'Hi {previousValue}! How old are you?',
             trigger: 'age',
           },
           {
             id: 'age',
             user: true,
-            trigger: '7',
+            trigger: '4',
             validator: (value) => {
               if (isNaN(value)) {
                 return 'value must be a number';
@@ -160,59 +99,68 @@ class CocoBot extends Component {
             },
           },
           {
-            id: '7',
-            message: 'Great! Check out your summary',
-            trigger: 'review',
+            id: '4',
+            message:'Thanks for the info!',
+            trigger:'5',
           },
           {
-            id: 'review',
-            component: <Review />,
-            asMessage: true,
-            trigger: 'update',
+            id:'5',
+            message:"Type of graph you're looking for? ",
+            trigger:'graphs',
+          },
+          {
+            id:'graphs',
+            options: [
+            { value: 'Line Graph', label: 'Line Graph', trigger: 'line' },
+            { value: 'Bar Graph', label: 'Bar Graph', trigger: 'bar' },
+            { value: 'Pie Graph', label:'Pie Graph', trigger: 'pie' },
+          ],
+          },
+          {
+            id:'line',
+            message:'Line graphs: These are used to show trends in data over time, such as changes in patient outcomes or disease prevalence.',
+            trigger:'line-example',
+          },
+          {
+            id:'line-example',
+            message:'Here is the Line graph',
+            trigger:'update',
+          },
+          {
+            id:'bar',
+            message:'Bar graphs: These are used to compare different categories or groups, such as comparing the incidence of a disease in different age groups or geographic regions.',
+            trigger:'bar-example',
+          },
+          {
+            id:'bar-example',
+            message:'Here is the Bar graph',
+            trigger:'update',
+          },
+          {
+            id:'pie',
+            message:'Pie charts: These are used to show how different categories or groups contribute to a whole, such as the proportion of different diseases in a patient population. ',
+            trigger:'pie-example',
+          },
+          {
+            id:'pie-example',
+            message:'Here is the Pie graph',
+            trigger:'update',
           },
           {
             id: 'update',
-            message: 'Would you like to update some field?',
+            message: 'Would you like to learn more about graphs?',
             trigger: 'update-question',
           },
           {
             id: 'update-question',
             options: [
-              { value: 'yes', label: 'Yes', trigger: 'update-yes' },
+              { value: 'yes', label: 'Yes', trigger: '5'},
               { value: 'no', label: 'No', trigger: 'end-message' },
             ],
           },
           {
-            id: 'update-yes',
-            message: 'What field would you like to update?',
-            trigger: 'update-fields',
-          },
-          {
-            id: 'update-fields',
-            options: [
-              { value: 'name', label: 'Name', trigger: 'update-name' },
-              { value: 'gender', label: 'Gender', trigger: 'update-gender' },
-              { value: 'age', label: 'Age', trigger: 'update-age' },
-            ],
-          },
-          {
-            id: 'update-name',
-            update: 'name',
-            trigger: '7',
-          },
-          {
-            id: 'update-gender',
-            update: 'gender',
-            trigger: '7',
-          },
-          {
-            id: 'update-age',
-            update: 'age',
-            trigger: '7',
-          },
-          {
             id: 'end-message',
-            message: 'Thanks! Your data was submitted successfully!',
+            message: 'Thanks! It was a lovely session!',
             trigger: 'save-data',
           },
           {
