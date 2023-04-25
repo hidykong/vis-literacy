@@ -11,9 +11,8 @@ app.use(bodyParser.json());
 // REST POST to save data
 app.post('/savedata', (req, res) => {
     const data = req.body
-    console.log(data)
-
-    fs.writeFile('data.json', JSON.stringify(data), (err) => {
+    const filename = 'DataFiles/' + data['name'] + data['age'] + '.json'
+    fs.writeFile(filename, JSON.stringify(data), (err) => {
         if (err) {
         console.error(err)
         res.status(500).send('Error saving data')
