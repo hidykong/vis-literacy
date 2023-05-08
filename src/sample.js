@@ -1,6 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
+import { LineGraph } from './LineGraph';
+import { BarGraph } from './BarGraph';
+import { PieGraph } from './PieGraph';
+
+//Data for line Graph
+const data = [
+  { x: 0, y: 1 },
+  { x: 1, y: 3 },
+  { x: 2, y: 2 },
+  { x: 3, y: 4 },
+  { x: 4, y: 3 },
+];
+
+//Data for bar Graph
+const bardata = [
+  { year: "2014", value: 100 },
+  { year: "2015", value: 200 },
+  { year: "2016", value: 300 },
+  { year: "2017", value: 400 },
+  { year: "2018", value: 500 },
+  { year: "2019", value: 600 },
+  { year: "2020", value: 700 },
+];
+
+//Data for pie Graph
+const piedata = [
+  { label: 'Apple', value: 30 },
+  { label: 'Orange', value: 50 },
+  { label: 'Banana', value: 20 },
+];
+
 
 
  // Component to save responses to database
@@ -123,7 +154,7 @@ class CocoBot extends Component {
           },
           {
             id:'line-example',
-            message:'Here is the Line graph',
+            component: <LineGraph data={data} />,
             trigger:'update',
           },
           {
@@ -133,7 +164,8 @@ class CocoBot extends Component {
           },
           {
             id:'bar-example',
-            message:'Here is the Bar graph',
+            //message:'Here is the Bar graph',
+            component: <BarGraph data={bardata} />,
             trigger:'update',
           },
           {
@@ -143,7 +175,7 @@ class CocoBot extends Component {
           },
           {
             id:'pie-example',
-            message:'Here is the Pie graph',
+            component :<PieGraph data={piedata} />,
             trigger:'update',
           },
           {
