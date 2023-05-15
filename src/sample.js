@@ -34,110 +34,33 @@ const piedata = [
 
 
 
- // Component to save responses to database
-class SaveData extends Component {
+// Component to render steps for conversation
+class CocoBot extends Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
-      age: '',
+      highlightYear: '2017'
     };
+    this.updateHighlightYear = this.updateHighlightYear.bind(this);
   }
 
-  componentWillMount() {    
-    this.handleSaveData()
-  }
-  
-  // Calls the REST API to save data
-  handleSaveData() {
-
-    const { steps } = this.props;
-    // Removed gender
-    const { name, age } = steps; 
-    
-    fetch('http://localhost:3000/savedata', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name.value,
-        age: age.value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
+  updateHighlightYear(year) {
+      this.setState({ highlightYear: year });
   }
 
-  render() {
-    return null;
-  }
-
-}
-
-SaveData.propTypes = {
-  steps: PropTypes.object,
-};
-
-SaveData.defaultProps = {
-  steps: undefined,
-};
-
-// Component to render steps for conversation
-class CocoBot extends Component {
   
   render() {
+    const { highlightYear } = this.state; 
+    console.log(highlightYear)
     return (
       <ChatBot handleEnd={this.handleEnd}
         steps={[
           {
             id: '1',
             message: "Hello there! I'm Cocobot, designed to help you understand graphs.",
-            trigger: '2',
-          },
-          {
-            id:'2',
-            message: 'What is your name?',
-            trigger: 'name',
-
-          },
-          {
-            id: 'name',
-            user: true,
-            trigger: '3',
-          },
-          {
-            id: '3',
-            message: 'Hi {previousValue}! How old are you?',
-            trigger: 'age',
-          },
-          {
-            id: 'age',
-            user: true,
-            trigger: '4',
-            validator: (value) => {
-              if (isNaN(value)) {
-                return 'value must be a number';
-              } else if (value < 0) {
-                return 'value must be positive';
-              } else if (value > 120) {
-                return `${value}? Come on!`;
-              }
-
-              return true;
-            },
-          },
-          {
-            id: '4',
-            message:'Thanks for the info!',
-            trigger:'5',
-          },
-          {
-            id:'5',
-            message:"Type of graph you're looking for? ",
-            trigger:'graphs',
+            trigger: 'graphs',
           },
           {
             id:'graphs',
@@ -164,8 +87,38 @@ class CocoBot extends Component {
           },
           {
             id:'bar-example',
-            //message:'Here is the Bar graph',
             component: <BarGraph data={bardata} />,
+            trigger:'highlight',
+          },
+          {
+            id:'highlight',
+            message:'Do you want to highlight the graph?',
+            trigger: 'options'
+          },
+          {
+            id:'options',
+            options: [
+              { value: 'Yes', label: 'Yes', trigger: 'highlight-question' },
+              { value: 'No', label: 'No', trigger: 'update' }
+            ],
+          },
+          {
+            id:'highlight-question',
+            message:'Which year onwards do you want to highlight?',
+            trigger:'highlight-answer',
+          },
+          {
+            id:'highlight-answer',
+            user: true,
+            // trigger:'highlighted'
+            trigger: ({value}) => {
+              this.updateHighlightYear(value);
+              return 'highlighted';
+            },
+          },
+          {
+            id:'highlighted',
+            component: <BarGraph data={bardata} highlightYear={this.state.highlightYear}/>,
             trigger:'update',
           },
           {
@@ -186,24 +139,27 @@ class CocoBot extends Component {
           {
             id: 'update-question',
             options: [
-              { value: 'yes', label: 'Yes', trigger: '5'},
+              { value: 'yes', label: 'Yes', trigger: 'graphs'},
               { value: 'no', label: 'No', trigger: 'end-message' },
             ],
           },
           {
             id: 'end-message',
             message: 'Thanks! It was a lovely session!',
-            trigger: 'save-data',
-          },
-          {
-            id: 'save-data',
-            component: <SaveData />,
             end: true,
-          },
+          }
         ]}
       />
     );
   }
 }
+
+CocoBot.propTypes = {
+  steps: PropTypes.object,
+};
+
+CocoBot.defaultProps = {
+  steps: undefined,
+};
 
 export default CocoBot;
