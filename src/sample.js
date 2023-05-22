@@ -32,28 +32,52 @@ const piedata = [
   { label: 'Banana', value: 20 },
 ];
 
+// Component to save responses to database
+class ComponentManager extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      highlightYear: ''
+    };
+
+  }
+
+  componentWillMount() {    
+    this.render()
+  }
+  
+  render() {
+    const { steps } = this.props;
+    const { highlightYear } = steps; 
+    if(highlightYear === undefined)
+    {
+      
+      return <BarGraph data={bardata} />
+    }
+    else
+    {
+      console.log("ComponentManager:" + highlightYear.value)
+      return <BarGraph data={bardata} highlightYear={highlightYear.value} />
+    }
+      
+  }
+  }
+
+ComponentManager.propTypes = {
+  steps: PropTypes.object,
+};
+
+ComponentManager.defaultProps = {
+  steps: undefined,
+};
 
 
 // Component to render steps for conversation
 class CocoBot extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      highlightYear: '2017'
-    };
-    this.updateHighlightYear = this.updateHighlightYear.bind(this);
-  }
-
-  updateHighlightYear(year) {
-      this.setState({ highlightYear: year });
-  }
-
-  
   render() {
-    const { highlightYear } = this.state; 
-    console.log(highlightYear)
+
     return (
       <ChatBot handleEnd={this.handleEnd}
         steps={[
@@ -87,7 +111,7 @@ class CocoBot extends Component {
           },
           {
             id:'bar-example',
-            component: <BarGraph data={bardata} />,
+            component: <ComponentManager />,
             trigger:'highlight',
           },
           {
@@ -105,20 +129,16 @@ class CocoBot extends Component {
           {
             id:'highlight-question',
             message:'Which year onwards do you want to highlight?',
-            trigger:'highlight-answer',
+            trigger:'highlightYear',
           },
           {
-            id:'highlight-answer',
+            id:'highlightYear',
             user: true,
-            // trigger:'highlighted'
-            trigger: ({value}) => {
-              this.updateHighlightYear(value);
-              return 'highlighted';
-            },
+            trigger:'highlighted'
           },
           {
             id:'highlighted',
-            component: <BarGraph data={bardata} highlightYear={this.state.highlightYear}/>,
+            component: <ComponentManager />,
             trigger:'update',
           },
           {
@@ -153,13 +173,5 @@ class CocoBot extends Component {
     );
   }
 }
-
-CocoBot.propTypes = {
-  steps: PropTypes.object,
-};
-
-CocoBot.defaultProps = {
-  steps: undefined,
-};
 
 export default CocoBot;
