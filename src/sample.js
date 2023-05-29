@@ -32,7 +32,7 @@ const piedata = [
   { label: 'Banana', value: 20 },
 ];
 
-// Component to save responses to database
+//Custom component to manage request and rendering of other components
 class ComponentManager extends Component {
   constructor(props) {
     super(props);
@@ -48,22 +48,22 @@ class ComponentManager extends Component {
 
     if( tutorialOptions && prevProps.steps.tutorialOptions !== tutorialOptions) {
       if( tutorialOptions.value === 'Previous') {
-        let index = this.state.tutorialStep - 1;
-        if (index < 0) {
-          index = 0;
+        let currentStep = this.state.tutorialStep - 1;
+        if (currentStep < 0) {
+          currentStep = 0;
         }
-        this.setState({tutorialStep: index});
+        this.setState({tutorialStep: currentStep});
       }
       else if( tutorialOptions.value === 'Next') {
-        let index = this.state.tutorialStep + 1
-        if (index < 3) { // 3 step tutorial
-          this.setState({tutorialStep: index})
+        let currentStep = this.state.tutorialStep + 1
+        if (currentStep < 3) { // 3 step tutorial
+          this.setState({tutorialStep: currentStep})
         }
       }
     }
   }
   
-    render() {
+  render() {
     const { steps } = this.props;
     const { graphs } = steps;
     const { tutorialStep } = this.state;
@@ -99,9 +99,8 @@ class ComponentManager extends Component {
     {
       return <BarGraph data={bardata} highlightXAxis={false} highlightYAxis={false} fullGraph={true}/>
     }
-      
   }
-  }
+}
 
 ComponentManager.propTypes = {
   steps: PropTypes.object,
