@@ -36,29 +36,31 @@ const piedata = [
 class ComponentManager extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      highlightYear: ''
-    };
-
-  }
-
-  componentWillMount() {    
-    this.render()
   }
   
-  render() {
+    render() {
     const { steps } = this.props;
-    const { highlightYear } = steps; 
-    if(highlightYear === undefined)
+    const {hightlightXaxis, hightlightYaxis, highlightYear, fullGraph} = steps;
+    
+    if (hightlightXaxis && !hightlightYaxis && hightlightXaxis.value === 'Next')
     {
-      
-      return <BarGraph data={bardata} />
+      return <BarGraph data={bardata} highlightXAxis={1}/>
+    }
+    else if (hightlightYaxis && !fullGraph && hightlightYaxis.value === 'Next')
+    {
+      return <BarGraph data={bardata} highlightYAxis={1}/>
+    }
+    else if (fullGraph && !highlightYear && fullGraph.value === 'Next')
+    {
+      return <BarGraph data={bardata} fullGraph={true}/>
+    }
+    else if (highlightYear)
+    {
+      return <BarGraph data={bardata} highlightYear={highlightYear.value} />
     }
     else
     {
-      console.log("ComponentManager:" + highlightYear.value)
-      return <BarGraph data={bardata} highlightYear={highlightYear.value} />
+      return <BarGraph data={bardata} />
     }
       
   }
@@ -107,7 +109,43 @@ class CocoBot extends Component {
           {
             id:'bar',
             message:'Bar graphs: These are used to compare different categories or groups, such as comparing the incidence of a disease in different age groups or geographic regions.',
-            trigger:'bar-example',
+            trigger:'help-needed',
+          },
+          {
+            id: 'help-needed',
+            message: 'Do you want me to explain this graph?',
+            trigger: 'hightlightXaxis',
+          },
+          {
+            id: 'hightlightXaxis',
+            options:[
+              { value: 'Next', label: 'Yes', trigger: 'Xaxis' },
+              { value: 'Previous', label: 'No', trigger: 'bar-example' },
+            ],
+          },
+          {
+            id:'Xaxis',
+            component:<ComponentManager/>,
+            trigger:'hightlightYaxis'
+          },
+          {
+            id:'hightlightYaxis',
+            options:[
+              { value: 'Previous', label: 'Previous', trigger: 'graphs' },
+              { value: 'Next', label: 'Next', trigger: 'Yaxis' },
+            ],
+          },
+          {
+            id:'Yaxis',
+            component:<ComponentManager/>,
+            trigger:'fullGraph'
+          },
+          {
+            id:'fullGraph',
+            options:[
+              { value: 'Previous', label: 'Previous', trigger: 'graphs' },
+              { value: 'Next', label: 'Next', trigger: 'bar-example'},
+            ],
           },
           {
             id:'bar-example',
