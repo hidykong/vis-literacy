@@ -6,7 +6,7 @@ import { BarGraph } from './BarGraph';
 import { PieGraph } from './PieGraph';
 
 //Data for line Graph
-const data = [
+const linedata = [
   { x: 0, y: 1 },
   { x: 1, y: 3 },
   { x: 2, y: 2 },
@@ -16,14 +16,14 @@ const data = [
 
 //Data for bar Graph
 const bardata = [
-  { year: "2014", value: 100 },
-  { year: "2015", value: 200 },
-  { year: "2016", value: 300 },
-  { year: "2017", value: 400 },
-  { year: "2018", value: 500 },
-  { year: "2019", value: 600 },
-  { year: "2020", value: 700 },
+  { age: 10, stressLevel: 6 },
+  { age: 20, stressLevel: 4 },
+  { age: 30, stressLevel: 7 },
+  { age: 40, stressLevel: 5 },
+  { age: 50, stressLevel: 8 },
+  { age: 60, stressLevel: 3 }
 ];
+
 
 //Data for pie Graph
 const piedata = [
@@ -36,31 +36,68 @@ const piedata = [
 class ComponentManager extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      tutorialStep: 0
+    }
+  }
+
+  componentWillUpdate(prevProps) {
+    const {steps} = this.props;
+    const { tutorialOptions } = steps;
+
+    if( tutorialOptions && prevProps.steps.tutorialOptions !== tutorialOptions) {
+      if( tutorialOptions.value === 'Previous') {
+        let index = this.state.tutorialStep - 1;
+        if (index < 0) {
+          index = 0;
+        }
+        this.setState({tutorialStep: index});
+      }
+      else if( tutorialOptions.value === 'Next') {
+        let index = this.state.tutorialStep + 1
+        if (index < 3) { // 3 step tutorial
+          this.setState({tutorialStep: index})
+        }
+      }
+    }
   }
   
     render() {
     const { steps } = this.props;
-    const {hightlightXaxis, hightlightYaxis, highlightYear, fullGraph} = steps;
-    
-    if (hightlightXaxis && !hightlightYaxis && hightlightXaxis.value === 'Next')
+    const { graphs } = steps;
+    const { tutorialStep } = this.state;
+
+    if(graphs && graphs.value === 'Line')
     {
-      return <BarGraph data={bardata} highlightXAxis={true}/>
+      return <LineGraph data={linedata} />
     }
-    else if (hightlightYaxis && !fullGraph && hightlightYaxis.value === 'Next')
+    else if(graphs &&  graphs.value === 'Bar')
     {
-      return <BarGraph data={bardata} highlightYAxis={true}/>
+      if(tutorialStep === 0)
+      {
+        return <BarGraph data={bardata} highlightXAxis={true} highlightYAxis={false} fullGraph={false}/>
+      }
+      else if(tutorialStep === 1)
+      {
+        return <BarGraph data={bardata} highlightXAxis={false} highlightYAxis={true} fullGraph={false}/>
+      }
+      else if(tutorialStep === 2)
+      {
+        return <BarGraph data={bardata} highlightXAxis={false} highlightYAxis={false} fullGraph={true}/>
+      }
+      else
+      {
+        return <BarGraph data={bardata} />
+      }
     }
-    else if (fullGraph && !highlightYear && fullGraph.value === 'Next')
+    else if(graphs && graphs.value === 'Pie')
     {
-      return <BarGraph data={bardata} fullGraph={true}/>
-    }
-    else if (highlightYear)
-    {
-      return <BarGraph data={bardata} highlightYear={highlightYear.value} />
+      return <PieGraph data={piedata} />
     }
     else
     {
-      return <BarGraph data={bardata} />
+      return <BarGraph data={bardata} highlightXAxis={false} highlightYAxis={false} fullGraph={true}/>
     }
       
   }
@@ -91,104 +128,26 @@ class CocoBot extends Component {
           {
             id:'graphs',
             options: [
-            { value: 'Line Graph', label: 'Line Graph', trigger: 'line' },
-            { value: 'Bar Graph', label: 'Bar Graph', trigger: 'bar' },
-            { value: 'Pie Graph', label:'Pie Graph', trigger: 'pie' },
+            { value: 'Line', label: 'Line Graph', trigger: 'chosenGraph' },
+            { value: 'Bar', label: 'Bar Graph', trigger: 'chosenGraph' },
+            { value: 'Pie', label:'Pie Graph', trigger: 'chosenGraph' },
           ],
           },
           {
-            id:'line',
-            message:'Line graphs: These are used to show trends in data over time, such as changes in patient outcomes or disease prevalence.',
-            trigger:'line-example',
-          },
-          {
-            id:'line-example',
-            component: <LineGraph data={data} />,
-            trigger:'update',
-          },
-          {
-            id:'bar',
-            message:'Bar graphs: These are used to compare different categories or groups, such as comparing the incidence of a disease in different age groups or geographic regions.',
-            trigger:'help-needed',
-          },
-          {
-            id: 'help-needed',
-            message: 'Do you want me to explain this graph?',
-            trigger: 'hightlightXaxis',
-          },
-          {
-            id: 'hightlightXaxis',
-            options:[
-              { value: 'Next', label: 'Yes', trigger: 'Xaxis' },
-              { value: 'Previous', label: 'No', trigger: 'bar-example' },
-            ],
-          },
-          {
-            id:'Xaxis',
-            component:<ComponentManager/>,
-            trigger:'hightlightYaxis'
-          },
-          {
-            id:'hightlightYaxis',
-            options:[
-              { value: 'Previous', label: 'Previous', trigger: 'graphs' },
-              { value: 'Next', label: 'Next', trigger: 'Yaxis' },
-            ],
-          },
-          {
-            id:'Yaxis',
-            component:<ComponentManager/>,
-            trigger:'fullGraph'
-          },
-          {
-            id:'fullGraph',
-            options:[
-              { value: 'Previous', label: 'Previous', trigger: 'graphs' },
-              { value: 'Next', label: 'Next', trigger: 'bar-example'},
-            ],
-          },
-          {
-            id:'bar-example',
+            id:'chosenGraph',
             component: <ComponentManager />,
-            trigger:'highlight',
+            trigger:'tutorialOptions',
           },
+          
           {
-            id:'highlight',
-            message:'Do you want to highlight the graph?',
-            trigger: 'options'
-          },
-          {
-            id:'options',
-            options: [
-              { value: 'Yes', label: 'Yes', trigger: 'highlight-question' },
-              { value: 'No', label: 'No', trigger: 'update' }
+            id: 'tutorialOptions',
+            options:[
+              { value: 'Previous', label: 'Previous', replace: true, trigger: 'tutorialOptions' },
+              { value: 'Next', label: 'Next', replace: true, trigger: 'tutorialOptions' },
+              { value: 'End', label: 'End', replace: true, trigger: 'update' },
             ],
           },
-          {
-            id:'highlight-question',
-            message:'Which year onwards do you want to highlight?',
-            trigger:'highlightYear',
-          },
-          {
-            id:'highlightYear',
-            user: true,
-            trigger:'highlighted'
-          },
-          {
-            id:'highlighted',
-            component: <ComponentManager />,
-            trigger:'update',
-          },
-          {
-            id:'pie',
-            message:'Pie charts: These are used to show how different categories or groups contribute to a whole, such as the proportion of different diseases in a patient population. ',
-            trigger:'pie-example',
-          },
-          {
-            id:'pie-example',
-            component :<PieGraph data={piedata} />,
-            trigger:'update',
-          },
+          
           {
             id: 'update',
             message: 'Would you like to learn more about graphs?',
