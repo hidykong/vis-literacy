@@ -44,11 +44,11 @@ class ComponentManager extends Component {
     
     if (hightlightXaxis && !hightlightYaxis && hightlightXaxis.value === 'Next')
     {
-      return <BarGraph data={bardata} highlightXAxis={1}/>
+      return <BarGraph data={bardata} highlightXAxis={true}/>
     }
     else if (hightlightYaxis && !fullGraph && hightlightYaxis.value === 'Next')
     {
-      return <BarGraph data={bardata} highlightYAxis={1}/>
+      return <BarGraph data={bardata} highlightYAxis={true}/>
     }
     else if (fullGraph && !highlightYear && fullGraph.value === 'Next')
     {
