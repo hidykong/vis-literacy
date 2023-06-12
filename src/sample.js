@@ -4,6 +4,7 @@ import ChatBot from 'react-simple-chatbot';
 import { LineGraph } from './LineGraph';
 import { BarGraph } from './BarGraph';
 import { PieGraph } from './PieGraph';
+import { TreeMap } from "./TreeMap";
 
 //Data for line Graph
 const linedata = [
@@ -31,6 +32,20 @@ const piedata = [
   { label: 'Orange', value: 50 },
   { label: 'Banana', value: 20 },
 ];
+
+
+//Data for  TreeMap
+  const data = {
+    name: "root",
+    children: [
+      { name: "India", value: 10 },
+      { name: "USA", value: 20 },
+      { name: "China", value: 15 },
+      { name: "Pakistan", value: 8 },
+      { name: "Cannada", value: 5 },
+    ],
+  };
+
 
 //Custom component to manage request and rendering of other components
 class ComponentManager extends Component {
@@ -71,6 +86,10 @@ class ComponentManager extends Component {
     if(graphs && graphs.value === 'Line')
     {
       return <LineGraph data={linedata} />
+    }
+    else if(graphs && graphs.value ==='TreeMap')
+    {
+      return <TreeMap data={data} />
     }
     else if(graphs &&  graphs.value === 'Bar')
     {
@@ -128,6 +147,7 @@ class CocoBot extends Component {
             id:'graphs',
             options: [
             { value: 'Line', label: 'Line Graph', trigger: 'chosenGraph' },
+            { value: 'TreeMap', label: 'TreeMap', trigger: 'chosenGraph' },
             { value: 'Bar', label: 'Bar Graph', trigger: 'chosenGraph' },
             { value: 'Pie', label:'Pie Graph', trigger: 'chosenGraph' },
           ],
