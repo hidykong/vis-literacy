@@ -1,19 +1,24 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-function TreeMap({ data }) {
+function TreeMap({ data, displayFullMap }) {
   const svgRef = useRef();
+  const displayMessageRef = useRef();
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
+    const displayMessage = displayMessageRef.current;
 
     // Define dimensions and margins
-    const margin = { top: 10, right: 10, bottom: 10, left: 10 };
+    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
     const width = +svg.attr("width") - margin.left - margin.right;
     const height = +svg.attr("height") - margin.top - margin.bottom;
 
+    // Filter the data based on the displayFullMap parameter
+    const filteredData = displayFullMap ? data.children : [data.children[0]];
+
     // Create a hierarchy from the data
-    const root = d3.hierarchy(data).sum((d) => d.value);
+    const root = d3.hierarchy({ children: filteredData }).sum((d) => d.value);
 
     // Create a treemap layout
     const treemap = d3
@@ -25,36 +30,34 @@ function TreeMap({ data }) {
     // Generate the treemap nodes
     const nodes = treemap(root).descendants();
 
-    // Create a group for each treemap node
+    // Clear existing nodes and tooltips
+    svg.selectAll("g.node").remove();
+    svg.select(".tooltip").remove();
+
+    displayMessage.innerHTML = "";
+
+    // Define color scale
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+    // Render treemap nodes
     const cell = svg
-      .selectAll("g")
+      .selectAll("g.node")
       .data(nodes)
       .enter()
       .append("g")
-      .attr("transform", (d) => `translate(${d.x0 + margin.left},${d.y0 + margin.top})`);
+      .attr("class", "node")
+      .attr("transform", (d) => `translate(${d.x0 + margin.left},${d.y0 + margin.top})`)
+      .on("mouseover", handleMouseOver)
+      .on("mouseout", handleMouseOut);
 
-    // Create rectangles for each treemap node
     cell
-        .append("rect")
-        .attr("width", (d) => d.x1 - d.x0)
-        .attr("height", (d) => d.y1 - d.y0)
-        .style("stroke", "black") // Add a black border
-        .style("stroke-width", 0.75) // Set the border width
-        .each(function(_, i) {
-        const cell = d3.select(this);
-        const originalColor = d3.schemeCategory10[i % 10]; // Assign different colors based on index
-    
-    cell
-        .style("fill", originalColor) // Set the initial fill color
-        .on("mouseover", () => {
-        cell.style("fill", "red"); // Change the fill color on mouseover
-        })
-        .on("mouseout", () => {
-        cell.style("fill", originalColor); // Revert to the original fill color on mouseout
-        });
-        });
-        
-    // Add text labels to the rectangles
+      .append("rect")
+      .attr("width", (d) => d.x1 - d.x0)
+      .attr("height", (d) => d.y1 - d.y0)
+      .style("stroke", "black")
+      .style("stroke-width", 0.75)
+      .style("fill", (_d, i) => colorScale(i));
+
     cell
       .append("text")
       .attr("x", 5)
@@ -62,11 +65,36 @@ function TreeMap({ data }) {
       .text((d) => d.data.name)
       .style("fill", "white");
 
-  }, [data]);
+    function handleMouseOver(_event, d) {
+      const tooltip = svg
+        .append("text")
+        .attr("class", "tooltip")
+        .attr("x", d.x0 + margin.left + 5)
+        .attr("y", d.y0 + margin.top + 15)
+        .style("fill", "black")
+        .style("font-weight", "bold");
+
+      tooltip.text(`${d.data.name}:${d.data.value}%`);
+    }
+
+    function handleMouseOut(_event, _d) {
+      svg.select(".tooltip").remove();
+    }
+
+    // Display message based on the displayFullMap parameter
+    if (displayFullMap) {
+      displayMessage.innerHTML = "Top five countries worldwide based on stress experienced when hover you will get to know %";
+    } else {
+      displayMessage.innerHTML = "Out of 100%, the people in stress are 35%";
+    }
+  }, [data, displayFullMap]);
 
   return (
-    <svg ref={svgRef} width={300} height={250} />
+    <div style={{ textAlign: "center" }}>
+      <div ref={displayMessageRef} style={{ fontSize: "16px", marginBottom: "10px" }}></div>
+      <svg ref={svgRef} width={350} height={250} />
+    </div>
   );
 }
 
-export {TreeMap};
+export { TreeMap };

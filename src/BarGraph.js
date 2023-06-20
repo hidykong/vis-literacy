@@ -130,6 +130,8 @@ function BarGraph({ data, highlightYear, highlightXAxis, highlightYAxis, fullGra
       .attr("width", x.bandwidth())
       .attr("height", (d) => height - y(d.stressLevel))
       .style("fill", "steelblue")
+      
+
       .on("mouseover", (event, d) => {
         d3.select(event.target).style("fill", "red");
         svg
@@ -148,6 +150,7 @@ function BarGraph({ data, highlightYear, highlightXAxis, highlightYAxis, fullGra
         d3.select(event.target).style("fill", "steelblue");
         svg.select(".tooltip").remove();
       }); 
+      displayMessage.innerHTML = "Bar graph enables the display of stress levels specific to individual age groups upon hovering";
     }
   }, [data, highlightYear, highlightXAxis, highlightYAxis]);
 

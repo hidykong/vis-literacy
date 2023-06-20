@@ -35,14 +35,14 @@ const piedata = [
 
 
 //Data for  TreeMap
-  const data = {
+  const treedata = {
     name: "root",
     children: [
-      { name: "India", value: 10 },
-      { name: "USA", value: 20 },
-      { name: "China", value: 15 },
-      { name: "Pakistan", value: 8 },
-      { name: "Cannada", value: 5 },
+      { name: "USA", value: 35, percentage:"35%" },
+      { name: "India", value: 25, percentage:"25%" },
+      { name: "China", value: 15, percentage:"15%" },
+      { name: "Japan" , value: 10, percentage:"10%" },
+      { name: "Cannada", value: 15, percentage:"15%" },
     ],
   };
 
@@ -89,7 +89,19 @@ class ComponentManager extends Component {
     }
     else if(graphs && graphs.value ==='TreeMap')
     {
-      return <TreeMap data={data} />
+      if(tutorialStep === 0)
+      {
+        return <TreeMap data={treedata} displayFullMap={false}/>
+      }
+      else if(tutorialStep === 1)
+      {
+        return <TreeMap data={treedata} displayFullMap={true}/>
+      }
+      else
+      {
+        return <TreeMap data={treedata} displayFullMap={true}/>
+      }
+      //return <TreeMap data={treedata} />
     }
     else if(graphs &&  graphs.value === 'Bar')
     {
