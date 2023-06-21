@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-function TreeMap({ data, displayFullMap }) {
+function TreeMap({ data, message, displayFullMap }) {
   const svgRef = useRef();
   const displayMessageRef = useRef();
 
@@ -14,11 +14,11 @@ function TreeMap({ data, displayFullMap }) {
     const width = +svg.attr("width") - margin.left - margin.right;
     const height = +svg.attr("height") - margin.top - margin.bottom;
 
-    // Filter the data based on the displayFullMap parameter
-    const filteredData = displayFullMap ? data.children : [data.children[0]];
+    // Total sum of coutries step by step  
+    const sum = d3.sum(data.children, (d) => d.value);
 
     // Create a hierarchy from the data
-    const root = d3.hierarchy({ children: filteredData }).sum((d) => d.value);
+    const root = d3.hierarchy({ children: data.children }).sum((d) => d.value);
 
     // Create a treemap layout
     const treemap = d3
@@ -73,8 +73,8 @@ function TreeMap({ data, displayFullMap }) {
         .attr("y", d.y0 + margin.top + 15)
         .style("fill", "black")
         .style("font-weight", "bold");
-
-      tooltip.text(`${d.data.name}:${d.data.value}%`);
+    
+      tooltip.text(`${d.data.name}:${d.data.value}[${((d.data.value * 100) / sum).toFixed(0) }%]`);
     }
 
     function handleMouseOut(_event, _d) {
@@ -85,7 +85,7 @@ function TreeMap({ data, displayFullMap }) {
     if (displayFullMap) {
       displayMessage.innerHTML = "Top five countries worldwide based on stress experienced when hover you will get to know %";
     } else {
-      displayMessage.innerHTML = "Out of 100%, the people in stress are 35%";
+      displayMessage.innerHTML = message
     }
   }, [data, displayFullMap]);
 

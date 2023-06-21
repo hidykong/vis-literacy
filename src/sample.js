@@ -38,11 +38,11 @@ const piedata = [
   const treedata = {
     name: "root",
     children: [
-      { name: "USA", value: 35, percentage:"35%" },
-      { name: "India", value: 25, percentage:"25%" },
-      { name: "China", value: 15, percentage:"15%" },
-      { name: "Japan" , value: 10, percentage:"10%" },
-      { name: "Cannada", value: 15, percentage:"15%" },
+      { name: "USA", value: 35},
+      { name: "India", value: 25},
+      { name: "China", value: 15},
+      { name: "Japan" , value: 10},
+      { name: "Cannada", value: 15},
     ],
   };
 
@@ -71,7 +71,7 @@ class ComponentManager extends Component {
       }
       else if( tutorialOptions.value === 'Next') {
         let currentStep = this.state.tutorialStep + 1
-        if (currentStep < 3) { // 3 step tutorial
+        if (currentStep < 5) { // 3 step tutorial
           this.setState({tutorialStep: currentStep})
         }
       }
@@ -91,17 +91,32 @@ class ComponentManager extends Component {
     {
       if(tutorialStep === 0)
       {
-        return <TreeMap data={treedata} displayFullMap={false}/>
+        const message = "Considering only USA stress level"
+        const data = {...treedata, children: treedata.children.slice(0, tutorialStep+1) };
+        return <TreeMap data={data} message={message} displayFullMap={false}/>
       }
       else if(tutorialStep === 1)
       {
-        return <TreeMap data={treedata} displayFullMap={true}/>
+        const message = "USA and India stress level "
+        const data = {...treedata, children: treedata.children.slice(0, tutorialStep+1) };
+        return <TreeMap data={data} message={message} displayFullMap={false}/>
+      }
+      else if(tutorialStep === 2)
+      {
+        const message = "USA and other 2 countries stress level"
+        let data = {...treedata, children: treedata.children.slice(0, tutorialStep+1) };
+        return <TreeMap data={data} message={message} displayFullMap={false}/>
+      }
+      else if(tutorialStep === 3)
+      {
+        const message = "USA and other 3 countrie stress level"
+        let data = {...treedata, children: treedata.children.slice(0, tutorialStep+1) };
+        return <TreeMap data={data} message={message} displayFullMap={false}/>
       }
       else
       {
         return <TreeMap data={treedata} displayFullMap={true}/>
       }
-      //return <TreeMap data={treedata} />
     }
     else if(graphs &&  graphs.value === 'Bar')
     {
