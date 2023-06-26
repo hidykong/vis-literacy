@@ -5,6 +5,8 @@ import { LineGraph } from './LineGraph';
 import { BarGraph } from './BarGraph';
 import { PieGraph } from './PieGraph';
 import { TreeMap } from "./TreeMap";
+import { BubbleMap } from "./BubbleMap"
+import { ScatterPlot } from './ScatterPlot';
 
 //Data for line Graph
 const linedata = [
@@ -38,13 +40,68 @@ const piedata = [
   const treedata = {
     name: "root",
     children: [
-      { name: "USA", value: 35},
-      { name: "India", value: 25},
-      { name: "China", value: 15},
-      { name: "Japan" , value: 10},
-      { name: "Cannada", value: 15},
+      { name: "USA", value: 35,
+        children: [
+          {name:"Washington", value: 10},
+          {name:"California", value: 10},
+          {name:"Oregon", value: 15},
+        ]
+      },
+      { name: "India", value: 25,
+        children: [
+          {name:"Kerala", value: 5},
+          {name:"Punjab", value: 10},
+          {name:"Goa", value: 10},
+        ]
+      },
+
+      { name: "China", value: 15,
+        children: [
+          {name:"Shanghai.", value: 8},
+          {name:"Tianjin", value: 2},
+          {name:"Beijing", value: 5},
+        ]
+      },
+      { name: "Japan" , value: 10,
+        children: [
+          {name:"Tokyo", value: 5},
+          {name:"Osaka", value: 3},
+          {name:"Nagoya", value: 2},
+        ]    
+      },
+      { name: "Canada", value: 15,
+        children: [
+          {name:"Toronto", value: 5},
+          {name:"Calgary", value: 3},
+          {name:"Vancouver", value:7},
+        ]
+      },
     ],
   };
+
+//Data for BubbleMap
+  const bubbledata = {
+    name: "root",
+    children: [
+      { name: "USA", value: 35 },
+      { name: "India", value: 25 },
+      { name: "China", value: 15 },
+      { name: "Japan", value: 10 },
+      { name: "Canada", value: 15}
+    ],
+  };
+
+// Data for ScatterPlot
+  const scatterdata = [
+    { age: 10, stressLevel: 5 },
+    { age: 20, stressLevel: 15 },
+    { age: 30, stressLevel: 18 },
+    { age: 40, stressLevel: 20 },
+    { age: 45, stressLevel: 18 },
+    { age: 15, stressLevel: 15 }
+  ];
+
+
 
 
 //Custom component to manage request and rendering of other components
@@ -86,6 +143,14 @@ class ComponentManager extends Component {
     if(graphs && graphs.value === 'Line')
     {
       return <LineGraph data={linedata} />
+    }
+    else if(graphs && graphs.value === 'BubbleMap')
+    {
+      return <BubbleMap data={bubbledata} />
+    }
+    else if(graphs && graphs.value === 'ScatterPlot')
+    {
+      return <ScatterPlot data={scatterdata} />
     }
     else if(graphs && graphs.value ==='TreeMap')
     {
@@ -177,6 +242,8 @@ class CocoBot extends Component {
             { value: 'TreeMap', label: 'TreeMap', trigger: 'chosenGraph' },
             { value: 'Bar', label: 'Bar Graph', trigger: 'chosenGraph' },
             { value: 'Pie', label:'Pie Graph', trigger: 'chosenGraph' },
+            { value: 'BubbleMap', label:'BubbleMap', trigger: 'chosenGraph'},
+            { value: 'ScatterPlot', label:'ScatterPlot', trigger: 'chosenGraph'},
           ],
           },
           {
