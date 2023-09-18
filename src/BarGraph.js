@@ -27,7 +27,7 @@ function BarGraph({ data }) {
 
     // Add axes
     const xAxis = d3.axisBottom().scale(x);
-    const yAxis = d3.axisLeft().scale(y);
+    const yAxis = d3.axisLeft().scale(y); 
 
     svg
       .append("g")

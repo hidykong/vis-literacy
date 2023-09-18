@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>Scrollytelling with Scrollama and D3 (demo)</title>
+      <meta name="description" content="An example of how to combine scrollama.js with d3.js for scrollytelling" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet"> 
+      <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="language">
+        Language: 
+        <a class="active" href="http://edriessen.com/app/scrollytelling-demo/">EN</a> |
+        <a href="http://edriessen.com/app/scrollytelling-demo/nl.html">NL</a>
+    </div>
+    <main>
+      <section class="generic" id="intro">
+        <h1>
+            Scrollytelling with scrollama.js and d3.js (demo)
+        </h1>
+        <p>
+            This is a scrollytelling demo. 
+            It was created using scrollama.js and d3.js. 
+            It assumes your screen is at least 1100 pixels wide
+            and it has only been tested on a modern Firefox browser.
+            Technical notes are down below.
+        </p>
+        <p>
+            Have fun.
+        </p>
+        <p class="seperator">
+        </p>
+      </section>
+
+      <section id="scrolly">
+          
+        <figure>
+          <div class="viz" id="avicii_viz"></div>
+          <script type="module" src="d3-animations.js"></script>
+        </figure>
+
+        <article>
+            
+            <div class="step" data-step="0">
+              
+                <h2>TreeMap</h2>
+                <p>
+                    A treemap is a visual method for displaying hierarchical data that uses nested rectangles to represent the branches of a tree diagram. 
+                    Each rectangle has an area proportional to the amount of data it represents.
+                </p>
+            </div>
+            
+            <div class="step" data-step="1">
+                <h2>Example</h2>
+                <p>
+                    Lets consider an example for TreeMap: 
+                    <p>
+                    <span class="label red">PET SHOP</span>, 
+                    Welcome to our pet shop! We offer a variety of adorable pets to choose from.
+                    Whether you're looking for loyal dogs, independent cats, cute mice, or friendly rabbits,
+                    we have the perfect pet for you. 
+                    <span class="label green">Explore our top-selling pets and find your new companion.</span>. </p>
+                </p>
+            </div>
+            
+            <div class="step" data-step="2">
+                <h2>Next</h2>
+                <p>
+                    At our pet shop, we have a wide range of adorable pets to choose from. Here are our top-selling pets categories: 
+                    <span class="label green">Mammals</span>, 
+                   <span class="label green">Birds</span>,  <span class="label green">Reptiles</span>  .
+                </p>
+            </div>
+            
+            <div class="step" data-step="3">
+                <h2>Followed By</h2>
+                <p>
+                 Our Top Categaries best Selling Pets:
+                     
+                </p>
+            </div>
+            
+            <div class="step" data-step="4">
+                <h2></h2>
+                <p>
+                    Highlighted part is top one:
+                     <span class="label">Mammals</span> popular companions are: 
+                    <span class="label green">Dogs:</span> Known for their loyalty and playfulness.
+                    <span class="label green">Cats:</span> Independent and affectionate companions.
+                    <span class="label green">Mice:</span> Cute and low-maintenance pets.
+                    <span class="label green">Rabbits:</span> friendly and great for families.
+                </p>
+            </div>
+            
+            <div class="step" data-step="5">
+                <h2></h2>
+                <p>
+                    Hightlighted part is 2nd: <span class="label">Reptiles</span> popular companions are: 
+                    <span class="label green">Snakes:</span> Fascinating reptiles with various species.
+                    <span class="label green">Geckos:</span> Unique and easy-to-care-for lizards.
+                    <span class="label green">Cats</span>
+                </p>
+            </div>
+            
+            <div class="step" data-step="6">
+                <h2> </h2>
+                <p>
+                    Next up, <span class="label">Birds</span> with 
+                    <span class="label green">Lovebirds:</span> Colorful and social birds.
+                    <span class="label green">Canaries</span> Melodious singers with vibrant plumage.
+                    <span class="label green">Cockatiels</span> Intelligent and charming parrots.
+                </p>
+            </div>
+            
+            <div class="step" data-step="7">
+                <h2></h2>
+                <p>
+                    Lastly, the treemap structure visualizes a "Pet Shop" hierarchy.
+                    At the top level is "Pet Shop," and within it, we have "Mammals and other two." 
+                    Inside "Mammals," we break down into "Dogs," "Cats," "Mice," and "Rabbits," 
+                    each represented proportionally in the treemap. This structure provides
+                    a clear overview of the pet shop's categories and their relationships.
+                </p>
+            </div>
+            
+            <div class="step" data-step="7">
+                <h2>The result</h2>
+                <p>
+                    When I clean up the final visualisation, I get a nice view of treemap.
+                    Keep in mind that this is all generated using code. 
+                    Pretty cool right?
+                </p>
+            </div>
+        </article>
+          
+      </section>
+
+      <section class="generic" id="outro">
+        <p class="seperator">
+        </p>
+        <p>
+            That's a wrap.
+            I hope you enjoyed this scrollytelling demo.
+            The technical notes are available on <a href="https://github.com/hidykong/vis-literacy">Github</a>.
+        </p>  
+        <p>
+            If you have any question, <a href="https://github.com/vidhireems">please do reach out to me</a>. 
+        </p>    
+    </section>
+    <section class="generic" id="footer">
+        <p>
+            <i>
+                This demo is created by Vidhi Rathod
+            </i>  
+        </p>
+      </section>
+    </main>
+
+<!--     <div class='debug'></div> -->
+    <script src="src/d3.5.9.1.min.js"></script>
+    <script src="src/intersection-observer.js"></script>
+    <script src="src/stickyfill.min.js"></script>
+    <script src="src/scrollama.min.js"></script>
+    <script src="data/aviciiTimData.js"></script>
+    <script src="d3-animations.js"></script>
+    <script src="scrollama-settings.js"></script>
+  </body>
+</html>
