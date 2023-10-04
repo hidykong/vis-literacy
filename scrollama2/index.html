@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>Scrollytelling with Scrollama and D3 (demo)</title>
+      <meta name="description" content="An example of how to combine scrollama.js with d3.js for scrollytelling" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet"> 
+      <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="language">
+        Language: 
+        <a class="active" href="http://edriessen.com/app/scrollytelling-demo/">EN</a> |
+        <a href="http://edriessen.com/app/scrollytelling-demo/nl.html">NL</a>
+    </div>
+    <main>
+      <section class="generic" id="intro">
+        <h1>
+            Scrollytelling with scrollama.js and d3.js (demo)
+        </h1>
+        <p>
+            This is a scrollytelling demo. 
+            It was created using scrollama.js and d3.js. 
+            It assumes your screen is at least 1100 pixels wide
+            and it has only been tested on a modern Firefox browser.
+            Technical notes are down below.
+        </p>
+        <p>
+            Have fun.
+        </p>
+        <p class="seperator">
+        </p>
+      </section>
+
+      <section id="scrolly">
+          
+        <figure>
+          <div class="viz" id="avicii_viz"></div>
+        </figure>
+
+        <article>
+            
+            <div class="step" data-step="0">
+              
+                <h2>Parallel Set Plot</h2>
+                <p>
+                Parallel plot or parallel coordinates plot allows to 
+                compare the feature of several individual observations 
+                (series) on a set of numeric variables. Each vertical 
+                bar represents a variable and often has its own scale. 
+                (The units can even be different). Values are then 
+                plotted as series of lines connected across each axis.
+                </p>
+            </div>
+            
+            <div class="step" data-step="1">
+                <h2>Example</h2>
+                <p>
+                    The ìris dataset provides four features (each represented 
+                    with a vertical line) for 8 flower samples (each 
+                    represented with a color line). Samples are grouped in 
+                    Two species. The chart beside highlights efficiently.
+                    Here the Blue color represent the species "<span class="label red"> Setosa </span>"
+                    and the orangish  <span class="label green">versicolor</span>.    
+                </p>
+            </div>
+            
+            <div class="step" data-step="2">
+                <h2></h2>
+                <p>
+                Let's consider two features: Sepal Length and Sepal Width. We observe that the Sepal Length of the Versicolor species is longer than that of Setosa.
+                </p>
+            </div>
+            <div class="step" data-step="3">
+                <h2></h2>
+                <p>
+                    In the case of the first three features, Sepal Length, Sepal Width, and Petal Length, we can make the following observations:
+
+                    For the Setosa species, as the Sepal Width increases, the Petal Length tends to decrease. In other words, Setosa flowers with wider sepals tend to have shorter petals.
+                    Conversely, for the Versicolor species, when the Sepal Width is shorter, the Petal Length tends to be longer. This means that Versicolor flowers with narrower sepals tend to have longer petals.
+                   
+                </p>
+            </div>
+            <div class="step" data-step="4">
+                <h2></h2>
+                <p>
+                    Let's consider the other two features: Petal Length and Petal Width. We observe that in the case of the Versicolor species, both Petal Length and Petal Width are longer and wider compared to Setosa
+                   
+                </p>
+            </div>
+            
+            <div class="step" data-step="5">
+                <h2>What for</h2>
+                <p>
+                    A parallel plot allows to study the features of samples for several quantitative variables. Its strength is that the variables can even be completely different: different ranges and even different units.
+
+                    In the graphic above flower features were grouped in species, and all variables were normalized and sharing the same unit (cm). 
+                </p>
+            </div>
+            
+            <div class="step" data-step="6">
+                <h2> Common Mistake</h2>
+                <p>
+                Like for line plot, displaying too many samples result in a cluttered and unreadable spaghetti chart.
+                Sort the variables on the X axis, it makes sense to avoid crosses in sample lines.
+                Try different scalings to find the one fitting your data best.
+                    
+                </p>
+            </div>
+            
+            <div class="step" data-step="7">
+                <h2>The result</h2>
+                <p>
+                    When I clean up the final visualisation, I get a nice view of the generated shape.
+                    Keep in mind that this is all generated using code.
+                    But it doesn't look like that.
+                    It looks like it's a hand-drawn signature. 
+                    Pretty cool right?
+                </p>
+            </div>
+        </article>
+          
+      </section>
+
+      <section class="generic" id="outro">
+        <p class="seperator">
+        </p>
+        <p>
+            That's a wrap.
+            I hope you enjoyed this scrollytelling demo.
+            The technical notes are available on <a href="https://github.com/hidykong/vis-literacy/scrollama2">Github</a>.
+        </p>  
+        <p>
+            If you have any question, <a href="https://github.com/vidhireems">please do reach out to me</a>. 
+        </p>    
+    </section>
+    <section class="generic" id="footer">
+        <p>
+            <i>
+                This demo is created by  Vidhi Rathod
+            </i>  
+        </p>
+      </section>
+    </main>
+
+<!--     <div class='debug'></div> -->
+    <script src="src/d3.5.9.1.min.js"></script>
+    <script src="src/intersection-observer.js"></script>
+    <script src="src/stickyfill.min.js"></script>
+    <script src="src/scrollama.min.js"></script>
+    <script src="data/aviciiTimData.js"></script>
+    <script src="d3-animations.js"></script>
+    <script src="scrollama-settings.js"></script>
+  </body>
+</html>

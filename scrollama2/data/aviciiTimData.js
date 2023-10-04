@@ -1,0 +1,58 @@
+const data = [
+  {
+    Sepal_Length: 5.1,
+    Sepal_Width: 3.5,
+    Petal_Length: 1.4,
+    Petal_Width: 0.2,
+    Species: "setosa",
+  },
+  {
+    Sepal_Length: 4.9,
+    Sepal_Width: 3.0,
+    Petal_Length: 1.4,
+    Petal_Width: 0.2,
+    Species: "setosa",
+  },
+  {
+    Sepal_Length: 4.7,
+    Sepal_Width: 3.2,
+    Petal_Length: 1.3,
+    Petal_Width: 0.2,
+    Species: "setosa",
+  },
+  {
+    Sepal_Length: 5.0,
+    Sepal_Width: 3.6,
+    Petal_Length: 1.4,
+    Petal_Width: 0.2,
+    Species: "setosa",
+  },
+  {
+    Sepal_Length: 5.4,
+    Sepal_Width: 3.9,
+    Petal_Length: 1.7,
+    Petal_Width: 0.4,
+    Species: "setosa",
+  },
+  {
+    Sepal_Length: 5.1,
+    Sepal_Width: 3.8,
+    Petal_Length: 1.5,
+    Petal_Width: 0.3,
+    Species: "setosa",
+  },
+  {
+    Sepal_Length: 7.0,
+    Sepal_Width: 3.2,
+    Petal_Length: 4.7,
+    Petal_Width: 1.4,
+    Species: "versicolor",
+  },
+  {
+    Sepal_Length: 6.4,
+    Sepal_Width: 3.2,
+    Petal_Length: 4.5,
+    Petal_Width: 1.5,
+    Species: "versicolor",
+  },
+];
