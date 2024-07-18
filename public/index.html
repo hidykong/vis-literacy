@@ -1,6 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      .sc-gqjmRU.gPJICP.rsc-header {
+        background-color: white;
+        border-bottom: 1px solid #707ddd;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+      }
+      .sc-bZQynM.bFhtIR.rsc-ts-bubble {
+        color: #454545;
+        background-color: rgb(223, 221, 221);
+        text-align: left;
+      }
+      .sc-gzVnrw.cwuCQv.rsc-ts-image {
+        display: none;
+      }
+      .sc-ifAKCX.gkhNlr.rsc-os-options button {
+        background-color: rgb(223, 221, 221);
+        color: #454545;
+      }
+      .sc-bZQynM.cbOIcL.rsc-ts-bubble {
+        background-color: rgb(223, 221, 221);
+        color: #454545;
+      }
+      .sc-bZQynM.eBokna.rsc-ts-bubble {
+        background-color: #454545;
+      }
+      .sc-htoDjs.fmWSyf.rsc-ts-image-container {
+        display: none;
+      }
+      .sc-cSHVUG.hDUXUW.rsc-footer {
+        border-color: #707ddd;
+        border-radius: 20;
+        border-width: 10;
+      }
+      .sc-chPdSV.iUYVrA .sc-submit-button {
+      }
+      .sc-kAzzGY.iAuOXT.rsc-input {
+        border-radius: 20;
+        border-color: #707ddd;
+        padding-top: 10;
+        padding-bottom: 20;
+      }
+    </style>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,6 +81,21 @@
 
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
+       <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const svgContainer = document.querySelector(
+          ".sc-chPdSV.iUYVrA.rsc-submit-button"
+        );
+        if (svgContainer) {
+          svgContainer.innerHTML = `
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8 1L15 8L8 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+              `;
+        }
+      });
+    </script>
     -->
   </body>
 </html>

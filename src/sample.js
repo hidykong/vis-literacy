@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ChatBot from "react-simple-chatbot";
-import { LineGraph } from "./LineGraph";
-import { BarGraph } from "./BarGraph";
-import { PieGraph } from "./PieGraph";
+// import { LineGraph } from "./LineGraph";
+// import { BarGraph } from "./BarGraph";
+// import { PieGraph } from "./PieGraph";
 import myImage from "./icons/pictures.png";
+import line from "./icons/Line.png";
+import trend from "./icons/Trend.png";
+import x from "./icons/X-axis.png";
+import y from "./icons/Y-axis.png";
+import circle from "./icons/Circle.png";
 // Data for line Graph
 const data = [
   { x: 0, y: 1 },
@@ -89,12 +94,6 @@ class CocoBot extends Component {
         steps={[
           {
             id: "1",
-            message:
-              "The horizontal x-axis shows the session number and the date when you completed them. Note that if you complete a session later than the planned date, the dates might not be evenly spread, even though the dots that present them appear to be.",
-            trigger: "2",
-          },
-          {
-            id: "2",
             component: (
               <img
                 src={myImage}
@@ -102,10 +101,11 @@ class CocoBot extends Component {
                 style={{ width: "100%", maxWidth: "500px", height: "auto" }}
               />
             ),
-            trigger: "3",
+            trigger: "2",
           },
+
           {
-            id: "3",
+            id: "2",
             message: "What elements are you confused about?",
             trigger: "elements",
           },
@@ -113,6 +113,8 @@ class CocoBot extends Component {
           {
             id: "elements",
             options: [
+              { value: "X-axis", label: "X-axis", trigger: "x-axis" },
+              { value: "Y-axis", label: "Y-axis", trigger: "y-axis" },
               { value: "Circle", label: "Circle", trigger: "circle" },
               { value: "Line", label: "Line", trigger: "line" },
               {
@@ -120,31 +122,107 @@ class CocoBot extends Component {
                 label: "Line trend",
                 trigger: "line trend",
               },
-              { value: "Example", label: "Example", trigger: "example" },
             ],
+          },
+
+          {
+            id: "x-axis",
+            message:
+              "The horizontal x-axis shows the session number and the date when you completed them.",
+            trigger: "3",
+          },
+
+          {
+            id: "3",
+            message:
+              "Note that if you complete a session later than the planned date, the dates might not be evenly spread, even though the dots that present them appear to be.",
+            trigger: "x-example",
+          },
+
+          {
+            id: "x-example",
+            component: (
+              <img
+                src={x}
+                alt="model_x"
+                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+              />
+            ),
+            trigger: "update",
+          },
+
+          {
+            id: "y-axis",
+            message:
+              "The vertical y-axis shows the symptom severity level (for example, anxiety) from 1 =  ‘least severe’  to 5 = ‘most severe’.",
+            trigger: "y-example",
+          },
+
+          {
+            id: "y-example",
+            component: (
+              <img
+                src={y}
+                alt="model_y"
+                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+              />
+            ),
+            trigger: "update",
           },
 
           {
             id: "line",
             message:
-              "Line graphs: These are used to show trends in data over time, such as changes in patient outcomes or disease prevalence.",
+              "The lines between circles show the trend of symptom severity level (for example, anxiety) after each session.",
+            trigger: "4",
+          },
+
+          {
+            id: "4",
+            message:
+              "Different line colors show whether the solution was used for the period. For example, between S3 and S4, the purple line is used to indicate that a solution was used in this period.",
             trigger: "line-example",
           },
           {
             id: "line-example",
-            component: <LineGraph data={data} />,
+            component: (
+              <img
+                src={line}
+                alt="model_line"
+                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+              />
+            ),
             trigger: "update",
           },
           {
             id: "line trend",
             message:
               "Generally, the line tilting down shows you are experiencing lower anxiety level, therefore better health.",
+            trigger: "5",
+          },
+
+          {
+            id: "5",
+            message:
+              "For example, in the first session (S1), you rated your anxiety level as 4, and in the second session (S2), you rated your stress level as 3. Therefore, the line between the first and second session tilts down, showing a decreasing trend in your anxiety level. ",
+            trigger: "5",
+          },
+
+          {
+            id: "5",
+            message:
+              "On the other hand, the line tilting upwards shows an increasing anxiety level and worse health.",
             trigger: "line trend-example",
           },
           {
             id: "line trend-example",
-            message:
-              "On the other hand, the line tilting upwards shows an increasing anxiety level and worse health.",
+            component: (
+              <img
+                src={trend}
+                alt="model_trend"
+                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+              />
+            ),
             trigger: "update",
           },
           {
@@ -155,27 +233,19 @@ class CocoBot extends Component {
           },
           {
             id: "circle-example",
-            message:
-              "Each circle represents the therapy session you had with Coco.",
-            trigger: "update",
-          },
-
-          {
-            id: "example",
-            message:
-              "Generally, the line tilting down shows you are experiencing lower anxiety level, therefore better health.",
-            trigger: "line trend-example",
-          },
-          {
-            id: "example-example",
-            message:
-              " For example, in the first session, you rated your stress level as 3, and in the second session, you rated your stress level as 1. Therefore, the line between the first and second session tilts down, showing a decreasing trend in your stress level.",
+            component: (
+              <img
+                src={circle}
+                alt="model_circle"
+                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+              />
+            ),
             trigger: "update",
           },
 
           {
             id: "update",
-            message: "Would you like to learn more about graphs?",
+            message: "What do you want to learn more about?",
             trigger: "update-question",
           },
           {
