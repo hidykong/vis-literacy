@@ -3,45 +3,113 @@
   <head>
     <style>
       .sc-gqjmRU.gPJICP.rsc-header {
+        display: grid;
+        place-items: center; /* Centers both horizontally and vertically */
+        height: 50px; /* Full height of the viewport */
+        border: 2px solid blue; /* For visualization */
+      }
+      .sc-gqjmRU.gPJICP.rsc-header {
         background-color: white;
-        border-bottom: 1px solid #707ddd;
+        border-bottom: 1px solid rgb(144, 144, 147);
         padding-bottom: 5px;
         margin-bottom: 5px;
+        width: 240px;
+        place-items: center;
       }
+
       .sc-bZQynM.bFhtIR.rsc-ts-bubble {
         color: #454545;
-        background-color: rgb(223, 221, 221);
+        background-color: rgb(235, 233, 233);
         text-align: left;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+        border-top-right-radius: 20px;
+        margin: 2;
+        margin-bottom: 5;
+        padding: 5;
       }
-      .sc-gzVnrw.cwuCQv.rsc-ts-image {
-        display: none;
+
+      .sc-bZQynM.fQQzVZ.rsc-ts-bubble {
+        color: #454545;
+        background-color: rgb(217, 22, 22);
+        text-align: left;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+        border-top-right-radius: 20px;
+        margin: 2;
+        margin-bottom: 5;
+        padding: 5;
       }
       .sc-ifAKCX.gkhNlr.rsc-os-options button {
-        background-color: rgb(223, 221, 221);
+        background-color: rgb(235, 233, 233);
         color: #454545;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+        border-top-right-radius: 20px;
       }
       .sc-bZQynM.cbOIcL.rsc-ts-bubble {
-        background-color: rgb(223, 221, 221);
+        background-color: rgb(235, 233, 233);
         color: #454545;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+        border-top-right-radius: 20px;
+        margin: 2;
+        margin-bottom: 5;
+        padding: 5;
       }
       .sc-bZQynM.eBokna.rsc-ts-bubble {
-        background-color: #454545;
+        background-color: #f0f1fd;
+        color: #3e41a8;
+        border-color: #707ddd;
+        border-style: solid;
+        border-width: 1px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+        border-top-right-radius: 20px;
+        margin: 2;
+        margin-bottom: 5;
+        padding: 5;
       }
+
       .sc-htoDjs.fmWSyf.rsc-ts-image-container {
         display: none;
       }
-      .sc-cSHVUG.hDUXUW.rsc-footer {
-        border-color: #707ddd;
-        border-radius: 20;
-        border-width: 10;
+      .sc-htoDjs.vmYlS.rsc-ts-image-container {
+        display: none;
       }
-      .sc-chPdSV.iUYVrA .sc-submit-button {
+      .sc-cSHVUG.hDUXUW.rsc-footer {
+        background-color: transparent;
+      }
+      .sc-chPdSV.iUYVrA.rsc-submit-button {
+        width: 20px;
+        height: 22px;
+        padding: 5px;
+      }
+      .sc-chPdSV.iUYVrA.rsc-submit-button svg {
+        width: 16px;
+        height: 16px;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMSA4SDE1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik04IDFMMTUgOEw4IDE1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==");
       }
       .sc-kAzzGY.iAuOXT.rsc-input {
-        border-radius: 20;
-        border-color: #707ddd;
-        padding-top: 10;
-        padding-bottom: 20;
+        border-color: #3e41a8;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        width: 280px;
+        height: 22px;
+        padding: 5px;
+        font-size: small;
+        border-top-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 1px;
+        border-left-width: 1px;
+        border-style: solid;
       }
     </style>
     <meta charset="utf-8" />

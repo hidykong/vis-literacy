@@ -55,23 +55,26 @@ class SaveData extends Component {
   // Calls the REST API to save data
   handleSaveData() {
     const { steps } = this.props;
-    const { name, age } = steps;
+    if (steps && steps.name && steps.age) {
+      const { name, age } = steps;
 
-    fetch("http://localhost:3000/savedata", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name.value,
-        age: age.value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
+      fetch("http://localhost:3000/savedata", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.value,
+          age: age.value,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+    } else {
+      console.error("Steps, name, or age is undefined");
+    }
   }
-
   render() {
     return null;
   }
@@ -113,18 +116,28 @@ class CocoBot extends Component {
           {
             id: "elements",
             options: [
-              { value: "X-axis", label: "X-axis", trigger: "x-axis" },
-              { value: "Y-axis", label: "Y-axis", trigger: "y-axis" },
-              { value: "Circle", label: "Circle", trigger: "circle" },
-              { value: "Line", label: "Line", trigger: "line" },
+              { value: "X-axis", label: "X-axis", trigger: "x-example" },
+              { value: "Y-axis", label: "Y-axis", trigger: "y-example" },
+              { value: "Circle", label: "Circle", trigger: "circle-example" },
+              { value: "Line", label: "Line", trigger: "line-example" },
               {
                 value: "Line trend",
                 label: "Line trend",
-                trigger: "line trend",
+                trigger: "line trend-example",
               },
             ],
           },
-
+          {
+            id: "x-example",
+            component: (
+              <img
+                src={x}
+                alt="model_x"
+                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+              />
+            ),
+            trigger: "x-axis",
+          },
           {
             id: "x-axis",
             message:
@@ -136,28 +149,8 @@ class CocoBot extends Component {
             id: "3",
             message:
               "Note that if you complete a session later than the planned date, the dates might not be evenly spread, even though the dots that present them appear to be.",
-            trigger: "x-example",
-          },
-
-          {
-            id: "x-example",
-            component: (
-              <img
-                src={x}
-                alt="model_x"
-                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
-              />
-            ),
             trigger: "update",
           },
-
-          {
-            id: "y-axis",
-            message:
-              "The vertical y-axis shows the symptom severity level (for example, anxiety) from 1 =  ‘least severe’  to 5 = ‘most severe’.",
-            trigger: "y-example",
-          },
-
           {
             id: "y-example",
             component: (
@@ -167,9 +160,25 @@ class CocoBot extends Component {
                 style={{ width: "100%", maxWidth: "500px", height: "auto" }}
               />
             ),
+            trigger: "y-axis",
+          },
+          {
+            id: "y-axis",
+            message:
+              "The vertical y-axis shows the symptom severity level (for example, anxiety) from 1 =  ‘least severe’  to 5 = ‘most severe’.",
             trigger: "update",
           },
-
+          {
+            id: "line-example",
+            component: (
+              <img
+                src={line}
+                alt="model_line"
+                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+              />
+            ),
+            trigger: "line",
+          },
           {
             id: "line",
             message:
@@ -181,18 +190,18 @@ class CocoBot extends Component {
             id: "4",
             message:
               "Different line colors show whether the solution was used for the period. For example, between S3 and S4, the purple line is used to indicate that a solution was used in this period.",
-            trigger: "line-example",
+            trigger: "update",
           },
           {
-            id: "line-example",
+            id: "line trend-example",
             component: (
               <img
-                src={line}
-                alt="model_line"
+                src={trend}
+                alt="model_trend"
                 style={{ width: "100%", maxWidth: "500px", height: "auto" }}
               />
             ),
-            trigger: "update",
+            trigger: "line trend",
           },
           {
             id: "line trend",
@@ -205,31 +214,14 @@ class CocoBot extends Component {
             id: "5",
             message:
               "For example, in the first session (S1), you rated your anxiety level as 4, and in the second session (S2), you rated your stress level as 3. Therefore, the line between the first and second session tilts down, showing a decreasing trend in your anxiety level. ",
-            trigger: "5",
+            trigger: "6",
           },
 
           {
-            id: "5",
+            id: "6",
             message:
               "On the other hand, the line tilting upwards shows an increasing anxiety level and worse health.",
-            trigger: "line trend-example",
-          },
-          {
-            id: "line trend-example",
-            component: (
-              <img
-                src={trend}
-                alt="model_trend"
-                style={{ width: "100%", maxWidth: "500px", height: "auto" }}
-              />
-            ),
             trigger: "update",
-          },
-          {
-            id: "circle",
-            message:
-              "Each circle represents the therapy session you had with Coco.",
-            trigger: "circle-example",
           },
           {
             id: "circle-example",
@@ -240,6 +232,12 @@ class CocoBot extends Component {
                 style={{ width: "100%", maxWidth: "500px", height: "auto" }}
               />
             ),
+            trigger: "circle",
+          },
+          {
+            id: "circle",
+            message:
+              "Each circle represents the therapy session you had with Coco.",
             trigger: "update",
           },
 
