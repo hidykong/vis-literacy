@@ -22,9 +22,26 @@ function App() {
     userFontColor: "black",
   };
 
+  const getCurrentDate = () => {
+    const date = new Date();
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   return (
     <div className="App">
       <div style={style}>
+        <div
+          className="Date"
+          style={{
+            textAlign: "center",
+            color: "grey",
+            marginTop: 50,
+            fontSize: 12,
+          }}
+        >
+          <p>{getCurrentDate()}</p>
+        </div>
         <ThemeProvider theme={theme}>
           <CocoBot />
         </ThemeProvider>

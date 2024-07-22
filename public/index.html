@@ -6,15 +6,15 @@
         display: grid;
         place-items: center; /* Centers both horizontally and vertically */
         height: 50px; /* Full height of the viewport */
-        border: 2px solid blue; /* For visualization */
-      }
-      .sc-gqjmRU.gPJICP.rsc-header {
         background-color: white;
         border-bottom: 1px solid rgb(144, 144, 147);
         padding-bottom: 5px;
         margin-bottom: 5px;
         width: 240px;
-        place-items: center;
+        margin: auto;
+      }
+      .Date {
+        position: absolute;
       }
 
       .sc-bZQynM.bFhtIR.rsc-ts-bubble {
@@ -28,11 +28,12 @@
         margin: 2;
         margin-bottom: 5;
         padding: 5;
+        margin-left: 0%;
       }
 
       .sc-bZQynM.fQQzVZ.rsc-ts-bubble {
         color: #454545;
-        background-color: rgb(217, 22, 22);
+        background-color: rgb(235, 233, 233);
         text-align: left;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
@@ -41,6 +42,7 @@
         margin: 2;
         margin-bottom: 5;
         padding: 5;
+        margin-left: 0%;
       }
       .sc-ifAKCX.gkhNlr.rsc-os-options button {
         background-color: rgb(235, 233, 233);
@@ -60,6 +62,7 @@
         margin: 2;
         margin-bottom: 5;
         padding: 5;
+        margin-left: 0%;
       }
       .sc-bZQynM.eBokna.rsc-ts-bubble {
         background-color: #f0f1fd;
@@ -74,6 +77,7 @@
         margin: 2;
         margin-bottom: 5;
         padding: 5;
+        margin-left: 0%;
       }
 
       .sc-htoDjs.fmWSyf.rsc-ts-image-container {
@@ -165,5 +169,44 @@
       });
     </script>
     -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Function to add the image to the header
+        function addImageToHeader() {
+          const header = document.querySelector(".sc-gqjmRU.gPJICP.rsc-header");
+          if (header && !header.querySelector("img")) {
+            // Check if image is not already added
+            const img = document.createElement("img");
+            img.src = "./splash-initial.png";
+            img.alt = "Local Image";
+            header.appendChild(img);
+          }
+        }
+
+        // Add image to the header on initial load
+        addImageToHeader();
+
+        // Set up MutationObserver to observe changes in the DOM
+        const observerConfig = { childList: true, subtree: true };
+
+        const callback = function(mutationsList, observer) {
+          for (let mutation of mutationsList) {
+            if (mutation.type === "childList") {
+              addImageToHeader();
+            }
+          }
+        };
+
+        const observer = new MutationObserver(callback);
+
+        // Start observing the body for changes
+        observer.observe(document.body, observerConfig);
+
+        // Clean up observer when necessary
+        window.addEventListener("beforeunload", () => {
+          observer.disconnect();
+        });
+      });
+    </script>
   </body>
 </html>
