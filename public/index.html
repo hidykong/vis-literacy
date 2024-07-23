@@ -7,12 +7,16 @@
         place-items: center; /* Centers both horizontally and vertically */
         height: 50px; /* Full height of the viewport */
         background-color: white;
-        border-bottom: 1px solid rgb(144, 144, 147);
+        border-bottom: 1px solid rgb(220, 220, 224);
         padding-bottom: 5px;
         margin-bottom: 5px;
         width: 240px;
         margin: auto;
       }
+      .sc-gqjmRU.gPJICP.rsc-header img {
+        width: 40px;
+      }
+
       .Date {
         position: absolute;
       }
@@ -23,12 +27,14 @@
         text-align: left;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         margin: 2;
         margin-bottom: 5;
         padding: 5;
-        margin-left: 0%;
+        margin-left: 10px;
+        margin-top: 1px;
+        max-width: 70%;
       }
 
       .sc-bZQynM.fQQzVZ.rsc-ts-bubble {
@@ -37,34 +43,40 @@
         text-align: left;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         margin: 2;
         margin-bottom: 5;
         padding: 5;
-        margin-left: 0%;
+        margin-left: 10px;
+        margin-top: 1px;
+        max-width: 70%;
       }
       .sc-ifAKCX.gkhNlr.rsc-os-options button {
         background-color: rgb(235, 233, 233);
         color: #454545;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
         border-top-right-radius: 20px;
       }
       .sc-bZQynM.cbOIcL.rsc-ts-bubble {
         background-color: rgb(235, 233, 233);
         color: #454545;
+        text-align: left;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         margin: 2;
         margin-bottom: 5;
         padding: 5;
-        margin-left: 0%;
+        margin-left: 10px;
+        margin-top: 1px;
+        max-width: 70%;
       }
       .sc-bZQynM.eBokna.rsc-ts-bubble {
+        text-align: left;
         background-color: #f0f1fd;
         color: #3e41a8;
         border-color: #707ddd;
@@ -72,12 +84,14 @@
         border-width: 1px;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         margin: 2;
         margin-bottom: 5;
         padding: 5;
-        margin-left: 0%;
+        margin-left: 10px;
+        margin-top: 1px;
+        max-width: 70%;
       }
 
       .sc-htoDjs.fmWSyf.rsc-ts-image-container {
@@ -90,9 +104,16 @@
         background-color: transparent;
       }
       .sc-chPdSV.iUYVrA.rsc-submit-button {
-        width: 20px;
-        height: 22px;
+        width: 26px;
+        height: 26px;
         padding: 5px;
+        background-color: #3e41a8;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
+        margin-top: 3px;
+        margin-right: 3px;
       }
       .sc-chPdSV.iUYVrA.rsc-submit-button svg {
         width: 16px;
@@ -106,14 +127,14 @@
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
         width: 280px;
-        height: 22px;
-        padding: 5px;
-        font-size: small;
+        height: 20px;
+        font-size: 90%;
         border-top-width: 1px;
         border-right-width: 1px;
         border-bottom-width: 1px;
         border-left-width: 1px;
         border-style: solid;
+        margin-left: 0px;
       }
     </style>
     <meta charset="utf-8" />
@@ -177,7 +198,8 @@
           if (header && !header.querySelector("img")) {
             // Check if image is not already added
             const img = document.createElement("img");
-            img.src = "./splash-initial.png";
+            img.src =
+              "https://previews.dropbox.com/p/thumb/ACVBY-EHi7gOLFQuz5Nbsz8PtcExEsZ9pbSJPZP82X_9YvO0mZ5ZEWotm_e_18wtEW1qbXKm2DAcFyndg18oOA7a3hMlJc9ojOj0VUHmvfYL8lBwNPa8k9k6QzgvUu0ffuU1DxfBMxYMKnkkvpQsZj86UQPLUbBFElrAZrVt5ERR_Xn9EDcx_Vkn-QhrftvmERPEkn3ApgbCgf3f85hNburDwlnrrc5uy4X8qf7Xe9n9bbKrdph6G1SX3pl16Al9xIl5YgjRVZzagHoTtLb3_yFKweo30vQQwF-azIXokPEQfzuNhj_FPA8_-sw0uKDYfXCbq4Ow6b2JMFHIzVriYGrn/p.png";
             img.alt = "Local Image";
             header.appendChild(img);
           }

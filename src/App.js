@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <div style={style}>
-        <div
+        {/* <div
           className="Date"
           style={{
             textAlign: "center",
@@ -40,8 +40,8 @@ function App() {
             fontSize: 12,
           }}
         >
-          <p>{getCurrentDate()}</p>
-        </div>
+        <p>{getCurrentDate()}</p>
+        </div> */}
         <ThemeProvider theme={theme}>
           <CocoBot />
         </ThemeProvider>
