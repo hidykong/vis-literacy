@@ -12,7 +12,9 @@
         margin-bottom: 5px;
         width: 240px;
         margin: auto;
+        justify-content: center;
       }
+
       .sc-gqjmRU.gPJICP.rsc-header img {
         width: 40px;
       }
@@ -118,7 +120,6 @@
       .sc-chPdSV.iUYVrA.rsc-submit-button svg {
         width: 16px;
         height: 16px;
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMSA4SDE1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik04IDFMMTUgOEw4IDE1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==");
       }
       .sc-kAzzGY.iAuOXT.rsc-input {
         border-color: #3e41a8;
@@ -199,7 +200,7 @@
             // Check if image is not already added
             const img = document.createElement("img");
             img.src =
-              "https://previews.dropbox.com/p/thumb/ACVBY-EHi7gOLFQuz5Nbsz8PtcExEsZ9pbSJPZP82X_9YvO0mZ5ZEWotm_e_18wtEW1qbXKm2DAcFyndg18oOA7a3hMlJc9ojOj0VUHmvfYL8lBwNPa8k9k6QzgvUu0ffuU1DxfBMxYMKnkkvpQsZj86UQPLUbBFElrAZrVt5ERR_Xn9EDcx_Vkn-QhrftvmERPEkn3ApgbCgf3f85hNburDwlnrrc5uy4X8qf7Xe9n9bbKrdph6G1SX3pl16Al9xIl5YgjRVZzagHoTtLb3_yFKweo30vQQwF-azIXokPEQfzuNhj_FPA8_-sw0uKDYfXCbq4Ow6b2JMFHIzVriYGrn/p.png";
+              "https://previews.dropbox.com/p/thumb/ACVNztd5e4oVpuxQZairQS9psbpumRre_4fEQ7i7ItTS3ix2o7PbR3lpgV5y1VxCzMYY6VLO3TjNaJejvQn3juLNanqHKwNHon4z8t0SQICs4HKmA2h8ni3bmLSWeS9rXxPRe-7M08Xot62G_9maxzPrnqwQ8O31euAAqxvd9bCppoec1ttbCvFQd9x2CXxnllz0g4GI3O1NN2VKZg_I_w49pcEv2vbPDEOaHfjm9g9yDw-VGcCEQpkQWI5N8H1Dc3qFo44lL2JyoJARMrSIefnJU3t7dRHLxJrzvXIfBZV19rQdw0FJybDd2JuwiTK1Ho0w0eEp_oIjFyY9zQCy3U4V/p.png?is_prewarmed=true";
             img.alt = "Local Image";
             header.appendChild(img);
           }
@@ -228,6 +229,20 @@
         window.addEventListener("beforeunload", () => {
           observer.disconnect();
         });
+      });
+      // JavaScript to change the background image
+      document.addEventListener("DOMContentLoaded", () => {
+        const element = document.querySelector(
+          ".sc-chPdSV.iUYVrA.rsc-submit-button"
+        );
+
+        if (element) {
+          element.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 1L15 8L8 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>  `;
+        }
       });
     </script>
   </body>

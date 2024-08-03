@@ -114,30 +114,49 @@ class CocoBot extends Component {
               />
             ),
             trigger: "3",
+            delay: 3000,
           },
 
           {
             id: "3",
             message: "What do you want to learn more about?",
             trigger: "elements",
+            dalay: 3000,
           },
 
           {
             id: "elements",
             options: [
-              { value: "X-axis", label: "X-axis", trigger: "x-example" },
-              { value: "Y-axis", label: "Y-axis", trigger: "y-example" },
-              { value: "Circle", label: "Circle", trigger: "circle-example" },
+              {
+                value: "X-axis",
+                label: "X-axis",
+                trigger: "x-example",
+                dalya: 3000,
+              },
+              {
+                value: "Y-axis",
+                label: "Y-axis",
+                trigger: "y-example",
+                delay: 3000,
+              },
+              {
+                value: "Circle",
+                label: "Circle",
+                trigger: "circle-example",
+                delay: 3000,
+              },
               { value: "Line", label: "Line", trigger: "line-example" },
               {
                 value: "Line trend",
                 label: "Line trend",
                 trigger: "line trend-example",
+                dalay: 3000,
               },
               {
-                value: "End",
-                label: "End",
+                value: "Quit",
+                label: "Quit",
                 trigger: "end-message",
+                delay: 3000,
               },
             ],
           },
@@ -192,6 +211,7 @@ class CocoBot extends Component {
               />
             ),
             trigger: "line",
+            delay: 3000,
           },
           {
             id: "line",
@@ -216,13 +236,24 @@ class CocoBot extends Component {
               />
             ),
             trigger: "line trend",
+            dalay: 3000,
           },
           {
             id: "line trend",
             message:
               "Generally, the line tilting down shows you are experiencing lower symptom severity level, therefore better health.",
-            trigger: "tilting down",
-            dalay: 3000,
+            trigger: "stop1",
+          },
+          {
+            id: "stop1",
+            options: [
+              {
+                value: "OK",
+                label: "OK",
+                trigger: "tilting down",
+                dalya: 3000,
+              },
+            ],
           },
           {
             id: "tilting down",
@@ -234,12 +265,25 @@ class CocoBot extends Component {
               />
             ),
             trigger: "6",
+            delay: 3000,
           },
+
           {
             id: "6",
             message:
               "For example, in the first session (S1), you rated your anxiety level as 4, and in the second session (S2), you rated your anxiety level as 3. Therefore, the line between the first and second session tilts down, showing a decreasing trend in your anxiety level. ",
-            trigger: "tilting up",
+            trigger: "stop2",
+          },
+          {
+            id: "stop2",
+            options: [
+              {
+                value: "OK",
+                label: "OK",
+                trigger: "tilting up",
+                dalya: 3000,
+              },
+            ],
           },
           {
             id: "tilting up",
@@ -251,6 +295,7 @@ class CocoBot extends Component {
               />
             ),
             trigger: "7",
+            delay: 3000,
           },
           {
             id: "7",
@@ -268,6 +313,7 @@ class CocoBot extends Component {
               />
             ),
             trigger: "circle",
+            delay: 3000,
           },
           {
             id: "circle",
