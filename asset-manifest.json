@@ -1,15 +1,23 @@
 {
   "files": {
-    "main.css": "/vis-literacy/static/css/main.e6c13ad2.css",
-    "main.js": "/vis-literacy/static/js/main.a85a8c41.js",
+    "main.css": "/vis-literacy/static/css/main.073c9b0a.css",
+    "main.js": "/vis-literacy/static/js/main.85bb29c8.js",
     "static/js/787.28cb0dcd.chunk.js": "/vis-literacy/static/js/787.28cb0dcd.chunk.js",
+    "static/media/Demo.png": "/vis-literacy/static/media/Demo.bd293f82056c419ecb36.png",
+    "static/media/Line.png": "/vis-literacy/static/media/Line.9caa99e00d96d6fa41db.png",
+    "static/media/Trend.png": "/vis-literacy/static/media/Trend.19227e33463cff524657.png",
+    "static/media/Tilt-up.png": "/vis-literacy/static/media/Tilt-up.cbfaf638f2f86ec1ec0d.png",
+    "static/media/Tilt-down.png": "/vis-literacy/static/media/Tilt-down.e4d66d53c515dc0b46b0.png",
+    "static/media/Circle.png": "/vis-literacy/static/media/Circle.4802d22cfa6afd761aae.png",
+    "static/media/Y-axis.png": "/vis-literacy/static/media/Y-axis.abea93f2aa51f7d28143.png",
+    "static/media/X-axis.png": "/vis-literacy/static/media/X-axis.9d73f4b997ff3cdd8d70.png",
     "index.html": "/vis-literacy/index.html",
-    "main.e6c13ad2.css.map": "/vis-literacy/static/css/main.e6c13ad2.css.map",
-    "main.a85a8c41.js.map": "/vis-literacy/static/js/main.a85a8c41.js.map",
+    "main.073c9b0a.css.map": "/vis-literacy/static/css/main.073c9b0a.css.map",
+    "main.85bb29c8.js.map": "/vis-literacy/static/js/main.85bb29c8.js.map",
     "787.28cb0dcd.chunk.js.map": "/vis-literacy/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.a85a8c41.js"
+    "static/css/main.073c9b0a.css",
+    "static/js/main.85bb29c8.js"
   ]
 }
