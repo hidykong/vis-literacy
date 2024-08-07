@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/vis-literacy/static/css/main.073c9b0a.css",
-    "main.js": "/vis-literacy/static/js/main.85bb29c8.js",
+    "main.js": "/vis-literacy/static/js/main.a09ecbb5.js",
     "static/js/787.28cb0dcd.chunk.js": "/vis-literacy/static/js/787.28cb0dcd.chunk.js",
     "static/media/Demo.png": "/vis-literacy/static/media/Demo.bd293f82056c419ecb36.png",
     "static/media/Line.png": "/vis-literacy/static/media/Line.9caa99e00d96d6fa41db.png",
@@ -13,11 +13,11 @@
     "static/media/X-axis.png": "/vis-literacy/static/media/X-axis.9d73f4b997ff3cdd8d70.png",
     "index.html": "/vis-literacy/index.html",
     "main.073c9b0a.css.map": "/vis-literacy/static/css/main.073c9b0a.css.map",
-    "main.85bb29c8.js.map": "/vis-literacy/static/js/main.85bb29c8.js.map",
+    "main.a09ecbb5.js.map": "/vis-literacy/static/js/main.a09ecbb5.js.map",
     "787.28cb0dcd.chunk.js.map": "/vis-literacy/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.85bb29c8.js"
+    "static/js/main.a09ecbb5.js"
   ]
 }
